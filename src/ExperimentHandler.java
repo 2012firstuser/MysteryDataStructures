@@ -3,19 +3,19 @@ import com.cs210x.Collection210X;
 
 public class ExperimentHandler {
 
-    private static final int STEP = 100;
+    private static final int STEP = 2;
     private static final int DATA_POINTS = 100;
-    private static final int TRIALS = 5;
+    private static final int TRIALS = 40;
 
     public Test _add_smallAndSorted,
                 _contains_firstAndLastTest,
-                _contains_anyElement,
+                _contains_maxAndMin,
                 _remove_singleChildAndLast;
 
     public ExperimentHandler() {
         _add_smallAndSorted = new ADD_SmallAndSorted();
         _contains_firstAndLastTest = new CONTAINS_FirstAndLast();
-        _contains_anyElement = new CONTAINS_MaxAndMin();
+        _contains_maxAndMin = new CONTAINS_MaxAndMin();
         _remove_singleChildAndLast = new REMOVE_SecondNodeAndLastElement();
     }
 
@@ -60,7 +60,7 @@ public class ExperimentHandler {
             final long endBestCase = CPUClock.getNumTicks();
 
             final long startWorstCase = CPUClock.getNumTicks();
-            c.contains((lastElement));
+            c.contains(lastElement);
             final long endWorstCase = CPUClock.getNumTicks();
 
             return new int[]{n, clockDifference(startBestCase, endBestCase), clockDifference(startWorstCase, endWorstCase)};
@@ -85,11 +85,11 @@ public class ExperimentHandler {
             }
 
             final long startBestCase = CPUClock.getNumTicks();
-            c.contains(minValue);
+            c.contains(maxValue);
             final long endBestCase = CPUClock.getNumTicks();
 
             final long startWorstCase = CPUClock.getNumTicks();
-            c.contains((maxValue));
+            c.contains(minValue);
             final long endWorstCase = CPUClock.getNumTicks();
 
             return new int[]{n, clockDifference(startBestCase, endBestCase), clockDifference(startWorstCase, endWorstCase)};
@@ -125,20 +125,47 @@ public class ExperimentHandler {
         }
     }
 
+    static class REMOVE_FirstAndLast implements Test {
+        @Override
+        public int[] runTest(Collection210X<Integer> c, int n) {
+            int firstElement = 0;
+            int lastElement = 1;
+
+            c.add(firstElement);
+
+            for(int i = 2; i < n + 2; i++) {
+                c.add(i);
+            }
+
+            c.add(lastElement);
+
+
+            final long startBestCase = CPUClock.getNumTicks();
+            c.remove(firstElement);
+            final long endBestCase = CPUClock.getNumTicks();
+
+            final long startWorstCase = CPUClock.getNumTicks();
+            c.remove(lastElement);
+            final long endWorstCase = CPUClock.getNumTicks();
+
+            return new int[]{n, clockDifference(startBestCase, endBestCase), clockDifference(startWorstCase, endWorstCase)};
+        }
+    }
+
     public static int[][] runTestAndAverageValues(Collection210X<Integer> c, Test test) {
         int[][] testResults = new int[DATA_POINTS][3];
 
         for(int trial = 0; trial < TRIALS; trial++) {
-            int[][] trialResults = new int[DATA_POINTS][3];
-
-            for(int currentStep = 1; currentStep < DATA_POINTS; currentStep++) {
-                int n = currentStep * STEP;
+            for(int currentStep = 0; currentStep < DATA_POINTS; currentStep++) {
+                int n = (currentStep + 1) * STEP;
 
                 int[] result = test.runTest(c, n);
 
                 testResults[currentStep][0] = n;
                 testResults[currentStep][1] = testResults[currentStep][1] + result[1];
                 testResults[currentStep][2] = testResults[currentStep][2] + result[2];
+
+                c.clear();
             }
         }
 
