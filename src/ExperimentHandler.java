@@ -9,11 +9,14 @@ public class ExperimentHandler {
 
     public Test _add_smallAndSorted,
                 _contains_firstAndLastTest,
-                _contains_anyElement;
+                _contains_anyElement,
+                _remove_singleChildAndLast;
 
     public ExperimentHandler() {
+        _add_smallAndSorted = new ADD_SmallAndSorted();
         _contains_firstAndLastTest = new CONTAINS_FirstAndLast();
         _contains_anyElement = new CONTAINS_MaxAndMin();
+        _remove_singleChildAndLast = new REMOVE_SecondNodeAndLastElement();
     }
 
     static class ADD_SmallAndSorted implements Test {
@@ -87,6 +90,35 @@ public class ExperimentHandler {
 
             final long startWorstCase = CPUClock.getNumTicks();
             c.contains((maxValue));
+            final long endWorstCase = CPUClock.getNumTicks();
+
+            return new int[]{n, clockDifference(startBestCase, endBestCase), clockDifference(startWorstCase, endWorstCase)};
+        }
+    }
+
+    static class REMOVE_SecondNodeAndLastElement implements Test {
+        @Override
+        public int[] runTest(Collection210X<Integer> c, int n) {
+            final int rootNode = 5;
+            final int rootNodeLeftChild = 3;
+            final int maxValue = 10000;
+            final int lastNode = maxValue + 5;
+
+            c.add(rootNode);
+
+            for(int i = rootNode; i < n + rootNode; i++) {
+                c.add((int) (rootNode + (Math.random() * (maxValue - 5)) + 1));
+            }
+
+            c.add(rootNodeLeftChild);
+            c.add(lastNode);
+
+            final long startBestCase = CPUClock.getNumTicks();
+            c.remove(rootNodeLeftChild);
+            final long endBestCase = CPUClock.getNumTicks();
+
+            final long startWorstCase = CPUClock.getNumTicks();
+            c.remove(lastNode);
             final long endWorstCase = CPUClock.getNumTicks();
 
             return new int[]{n, clockDifference(startBestCase, endBestCase), clockDifference(startWorstCase, endWorstCase)};
