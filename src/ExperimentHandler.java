@@ -50,9 +50,14 @@ public class ExperimentHandler {
             int firstElement = 0;
             int lastElement = 1;
 
+            c.add(firstElement);
+
             for(int i = 2; i < n + 2; i++) {
                 c.add(i);
             }
+
+            c.add(lastElement);
+
 
             final long startBestCase = CPUClock.getNumTicks();
             c.contains(firstElement);
@@ -69,7 +74,7 @@ public class ExperimentHandler {
     static class CONTAINS_MaxAndMin implements Test{
         @Override
         public int[] runTest(Collection210X<Integer> c, int n) {
-            return new int[0];
+            int minValue =
         }
     }
 }
