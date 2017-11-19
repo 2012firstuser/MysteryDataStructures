@@ -74,7 +74,29 @@ public class ExperimentHandler {
     static class CONTAINS_MaxAndMin implements Test{
         @Override
         public int[] runTest(Collection210X<Integer> c, int n) {
-            int minValue =
+            int minValue = -1;
+            int maxValue = Integer.MAX_VALUE - 100;
+
+            for(int i = 0; i < n - 2; i++) {
+                c.add((int) (i * (Math.random() * 1000)));
+
+                if(i == n / 3) {
+                    c.add(minValue);
+                }
+                if(i == n * 2 / 3) {
+                    c.add(maxValue);
+                }
+            }
+
+            final long startBestCase = CPUClock.getNumTicks();
+            c.contains(minValue);
+            final long endBestCase = CPUClock.getNumTicks();
+
+            final long startWorstCase = CPUClock.getNumTicks();
+            c.contains((maxValue));
+            final long endWorstCase = CPUClock.getNumTicks();
+
+            return new int[]{n, clockDifference(startBestCase, endBestCase), clockDifference(startWorstCase, endWorstCase)};
         }
     }
 }
