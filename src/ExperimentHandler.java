@@ -10,13 +10,17 @@ public class ExperimentHandler {
     public Test _add_smallAndSorted,
                 _contains_firstAndLastTest,
                 _contains_maxAndMin,
-                _remove_singleChildAndLast;
+                _remove_singleChildAndLast,
+                _remove_firstAndLast,
+                _remove_maxAndMin;
 
     public ExperimentHandler() {
         _add_smallAndSorted = new ADD_SmallAndSorted();
         _contains_firstAndLastTest = new CONTAINS_FirstAndLast();
         _contains_maxAndMin = new CONTAINS_MaxAndMin();
         _remove_singleChildAndLast = new REMOVE_SecondNodeAndLastElement();
+        _remove_firstAndLast = new REMOVE_FirstAndLast();
+        _remove_maxAndMin = new REMOVE_MaxAndMin();
     }
 
     static class ADD_SmallAndSorted implements Test {
