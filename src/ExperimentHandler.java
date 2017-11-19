@@ -121,6 +121,8 @@ public class ExperimentHandler {
             c.remove(rootNodeLeftChild);
             final long endBestCase = CPUClock.getNumTicks();
 
+            c.add((n + rootNode) / 2);
+
             final long startWorstCase = CPUClock.getNumTicks();
             c.remove(lastNode);
             final long endWorstCase = CPUClock.getNumTicks();
@@ -147,6 +149,8 @@ public class ExperimentHandler {
             final long startBestCase = CPUClock.getNumTicks();
             c.remove(firstElement);
             final long endBestCase = CPUClock.getNumTicks();
+
+            c.add(n / 2);
 
             final long startWorstCase = CPUClock.getNumTicks();
             c.remove(lastElement);
@@ -177,6 +181,8 @@ public class ExperimentHandler {
             final long startBestCase = CPUClock.getNumTicks();
             c.remove(maxValue);
             final long endBestCase = CPUClock.getNumTicks();
+
+            c.add(n/2);
 
             final long startWorstCase = CPUClock.getNumTicks();
             c.remove(minValue);
