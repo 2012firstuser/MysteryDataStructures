@@ -152,6 +152,36 @@ public class ExperimentHandler {
         }
     }
 
+    static class REMOVE_MaxAndMin implements Test {
+        @Override
+        public int[] runTest(Collection210X<Integer> c, int n) {
+            int minValue = -1;
+            int maxValue = Integer.MAX_VALUE - 100;
+
+            // TODO: Remove duplicate code
+            for(int i = 0; i < n - 2; i++) {
+                c.add((int) (i * (Math.random() * 1000)));
+
+                if(i == n / 3) {
+                    c.add(minValue);
+                }
+                if(i == n * 2 / 3) {
+                    c.add(maxValue);
+                }
+            }
+
+            final long startBestCase = CPUClock.getNumTicks();
+            c.remove(maxValue);
+            final long endBestCase = CPUClock.getNumTicks();
+
+            final long startWorstCase = CPUClock.getNumTicks();
+            c.remove(minValue);
+            final long endWorstCase = CPUClock.getNumTicks();
+
+            return new int[]{n, clockDifference(startBestCase, endBestCase), clockDifference(startWorstCase, endWorstCase)};
+        }
+    }
+
     public static int[][] runTestAndAverageValues(Collection210X<Integer> c, Test test) {
         int[][] testResults = new int[DATA_POINTS][3];
 
