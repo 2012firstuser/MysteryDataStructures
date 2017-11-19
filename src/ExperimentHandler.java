@@ -7,6 +7,14 @@ public class ExperimentHandler {
     private static final int DATA_POINTS = 100;
     private static final int TRIALS = 5;
 
+    public Test _contains_firstAndLastTest,
+                 _contains_anyElement;
+
+    public ExperimentHandler() {
+        _contains_firstAndLastTest = new CONTAINS_FirstAndLast();
+        _contains_anyElement = new CONTAINS_MaxAndMin();
+    }
+
     public static int[][] runTestAndAverageValues(Collection210X<Integer> c, Test test) {
         int[][] testResults = new int[DATA_POINTS][3];
 
@@ -36,7 +44,7 @@ public class ExperimentHandler {
         return ((int) (endTime - startTime));
     }
 
-    class checkContainsFirstAndLast implements Test {
+    static class CONTAINS_FirstAndLast implements Test {
         @Override
         public int[] runTest(Collection210X<Integer> c, int n) {
             int firstElement = 0;
@@ -55,6 +63,13 @@ public class ExperimentHandler {
             final long endWorstCase = CPUClock.getNumTicks();
 
             return new int[]{n, clockDifference(startBestCase, endBestCase), clockDifference(startWorstCase, endWorstCase)};
+        }
+    }
+
+    static class CONTAINS_MaxAndMin implements Test{
+        @Override
+        public int[] runTest(Collection210X<Integer> c, int n) {
+            return new int[0];
         }
     }
 }
