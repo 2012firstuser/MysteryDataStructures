@@ -78,7 +78,7 @@ public class ExperimentHandler {
             int maxValue = Integer.MAX_VALUE - 100;
 
             for(int i = 0; i < n - 2; i++) {
-                c.add((int) (i * (Math.random() * 1000)));
+                c.add((int) (i + (Math.random() * 1000)));
 
                 if(i == n / 3) {
                     c.add(minValue);

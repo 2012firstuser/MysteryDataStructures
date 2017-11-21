@@ -27,8 +27,18 @@ public class CSVCreator {
             nextline += "\n";
 
             writer.write(nextline);
-        }
 
+            System.out.print("Structure: ");
+            System.out.print(datasetNum);
+            System.out.print(" Test Number: ");
+            System.out.print(testname);
+            System.out.print(" n: ");
+            System.out.print(data[k][0]);
+            System.out.print(" best: ");
+            System.out.print(data[k][1]);
+            System.out.print(" worst: ");
+            System.out.println(data[k][2]);
+        }
         writer.close();
     }
 }
