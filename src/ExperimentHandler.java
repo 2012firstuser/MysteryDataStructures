@@ -3,7 +3,7 @@ import com.cs210x.Collection210X;
 
 public class ExperimentHandler {
 
-    private static final int STEP = 2;
+    private static final int STEP = 100;
     private static final int DATA_POINTS = 100;
     private static final int TRIALS = 40;
 

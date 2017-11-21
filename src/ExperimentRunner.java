@@ -6,7 +6,7 @@ import com.cs210x.*;
 public class ExperimentRunner {
 	private static final int NUM_DATA_STRUCTURES_TO_DEDUCE = 5;
 
-	public static void main (String[] args) {
+	public static void main (String[] args) throws Exception {
 		final String cs210XTeamIDForProject4 = "ashaji"; // TODO CHANGE THIS TO THE TEAM ID YOU USE TO SUBMIT YOUR PROJECT3 ON INSTRUCT-ASSIST.
 
 		// Fetch the collections whose type you must deduce.
@@ -16,6 +16,7 @@ public class ExperimentRunner {
 		// the class you want the collection to store.
 
 		final ExperimentHandler eh = new ExperimentHandler();
+		final CSVCreator csvc = new CSVCreator();
 
 		@SuppressWarnings("unchecked")
 		final Collection210X<Integer>[] mysteryDataStructures = (Collection210X<Integer>[]) new Collection210X[NUM_DATA_STRUCTURES_TO_DEDUCE];
@@ -31,62 +32,33 @@ public class ExperimentRunner {
 		for(int i = 0; i < NUM_DATA_STRUCTURES_TO_DEDUCE; i++) {
 			Collection210X<Integer> dataStructure = mysteryDataStructures[i];
 
-			System.out.print("Structure: ");
-			System.out.println(i);
-
-			int[][] sas = ExperimentHandler.runTestAndAverageValues(dataStructure, eh._add_smallAndSorted);
-
+			CSVCreator.exportData(ExperimentHandler.runTestAndAverageValues(dataStructure,
+					eh._add_smallAndSorted), "test1", i);
 			dataStructure.clear();
 
-			int[][] cfl = ExperimentHandler.runTestAndAverageValues(dataStructure, eh._contains_firstAndLastTest);
-
+			CSVCreator.exportData(ExperimentHandler.runTestAndAverageValues(dataStructure,
+					eh._contains_firstAndLastTest), "test2", i);
 			dataStructure.clear();
 
-			int[][] cmm = ExperimentHandler.runTestAndAverageValues(dataStructure, eh._contains_maxAndMin);
-
+			CSVCreator.exportData(ExperimentHandler.runTestAndAverageValues(dataStructure,
+					eh._contains_maxAndMin), "test3", i);
 			dataStructure.clear();
 
-			int[][] rs = ExperimentHandler.runTestAndAverageValues(dataStructure, eh._remove_singleChildAndLast);
+			CSVCreator.exportData(ExperimentHandler.runTestAndAverageValues(dataStructure,
+					eh._remove_firstAndLast), "test4", i);
+			dataStructure.clear();
 
-			System.out.println("Add Small and Big Sorted");
-			for(int j = 0; j < sas.length; j++) {
-				System.out.print("n: ");
-				System.out.print(sas[j][0]);
-				System.out.print(" Best Case: ");
-				System.out.print(sas[j][1]);
-				System.out.print(" Worst Case: ");
-				System.out.println(sas[j][2]);
-			}
+			CSVCreator.exportData(ExperimentHandler.runTestAndAverageValues(dataStructure,
+					eh._remove_maxAndMin), "test5", i);
+			dataStructure.clear();
 
-			System.out.println("Contains First and Last");
-			for(int j = 0; j < cfl.length; j++) {
-				System.out.print("n: ");
-				System.out.print(cfl[j][0]);
-				System.out.print(" Best Case: ");
-				System.out.print(cfl[j][1]);
-				System.out.print(" Worst Case: ");
-				System.out.println(cfl[j][2]);
-			}
+			CSVCreator.exportData(ExperimentHandler.runTestAndAverageValues(dataStructure,
+					eh._remove_singleChildAndLast), "test6", i);
+			dataStructure.clear();
 
-			System.out.println("Contains Max and Min");
-			for(int j = 0; j < cmm.length; j++) {
-				System.out.print("n: ");
-				System.out.print(cmm[j][0]);
-				System.out.print(" Best Case: ");
-				System.out.print(cmm[j][1]);
-				System.out.print(" Worst Case: ");
-				System.out.println(cmm[j][2]);
-			}
-
-			System.out.println("Remove Special");
-			for(int j = 0; j < rs.length; j++) {
-				System.out.print("n: ");
-				System.out.print(rs[j][0]);
-				System.out.print(" Best Case: ");
-				System.out.print(rs[j][1]);
-				System.out.print(" Worst Case: ");
-				System.out.println(rs[j][2]);
-			}
+			System.out.print("Structure ");
+			System.out.print(i);
+			System.out.println(" done");
 		}
 	}
 }
