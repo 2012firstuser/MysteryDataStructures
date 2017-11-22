@@ -5,7 +5,7 @@ public class ExperimentHandler {
 
     private static final int STEP = 100;
     private static final int DATA_POINTS = 100;
-    private static final int TRIALS = 150;
+    private static final int TRIALS = 500;
 
     public Test _add_smallAndSorted,
                 _contains_firstAndLastTest,
