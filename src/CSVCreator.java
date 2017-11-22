@@ -8,7 +8,6 @@ public class CSVCreator {
 
     }
     public static void exportData(int[][] data, String testname, int datasetNum) throws Exception {
-//        String file = "/MysteryDataStructure" + datasetNum + "/" + testname + ".csv";
         String file = datasetNum + "_" + testname + ".csv";
 
         FileWriter writer = new FileWriter(file);
@@ -28,16 +27,16 @@ public class CSVCreator {
 
             writer.write(nextline);
 
-            System.out.print("Structure: ");
-            System.out.print(datasetNum);
-            System.out.print(" Test Number: ");
-            System.out.print(testname);
-            System.out.print(" n: ");
-            System.out.print(data[k][0]);
-            System.out.print(" best: ");
-            System.out.print(data[k][1]);
-            System.out.print(" worst: ");
-            System.out.println(data[k][2]);
+//            System.out.print("Structure: ");
+//            System.out.print(datasetNum);
+//            System.out.print(" Test Number: ");
+//            System.out.print(testname);
+//            System.out.print(" n: ");
+//            System.out.print(data[k][0]);
+//            System.out.print(" best: ");
+//            System.out.print(data[k][1]);
+//            System.out.print(" worst: ");
+//            System.out.println(data[k][2]);
         }
         writer.close();
     }
