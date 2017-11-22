@@ -1,12 +1,18 @@
 import com.cs210x.CPUClock;
 import com.cs210x.Collection210X;
 
+/**
+ * Outer class to store store all of the different experients that we ran  on the data structures
+ */
 public class ExperimentHandler {
 
     private static final int STEP = 100;
     private static final int DATA_POINTS = 100;
     private static final int TRIALS = 500;
 
+    /**
+     * Declaring all of the tests that we have
+     */
     public Test _add_smallAndSorted,
                 _contains_firstAndLastTest,
                 _contains_maxAndMin,
@@ -14,6 +20,9 @@ public class ExperimentHandler {
                 _remove_firstAndLast,
                 _remove_maxAndMin;
 
+    /**
+     * Constructor. Intilalizes all of the tests
+     */
     public ExperimentHandler() {
         _add_smallAndSorted = new ADD_SmallAndSorted();
         _contains_firstAndLastTest = new CONTAINS_FirstAndLast();
@@ -23,7 +32,16 @@ public class ExperimentHandler {
         _remove_maxAndMin = new REMOVE_MaxAndMin();
     }
 
+    /**
+     * Test1 for the experiment. For greater detail, look at our report
+     */
     static class ADD_SmallAndSorted implements Test {
+        /**
+         * Runs test1
+         * @param c Mystery collection
+         * @param n number of elements
+         * @return Array of [n, bestCaseTime, worstCaseTime]
+         */
         @Override
         public int[] runTest(Collection210X<Integer> c, int n) {
             final int rootNode = 5;
@@ -44,7 +62,16 @@ public class ExperimentHandler {
         }
     }
 
+    /**
+     * Test2 for the experiment. For greater detail, look at our report
+     */
     static class CONTAINS_FirstAndLast implements Test {
+        /**
+         * Runs test2
+         * @param c Mystery collection
+         * @param n number of elements
+         * @return Array of [n, bestCaseTime, worstCaseTime]
+         */
         @Override
         public int[] runTest(Collection210X<Integer> c, int n) {
             int firstElement = 0;
@@ -71,8 +98,17 @@ public class ExperimentHandler {
         }
     }
 
+    /**
+     * Test3 for the experiment. For greater detail, look at our report
+     */
     static class CONTAINS_MaxAndMin implements Test{
         @Override
+        /**
+         * Runs test3
+         * @param c Mystery collection
+         * @param n number of elements
+         * @return Array of [n, bestCaseTime, worstCaseTime]
+         */
         public int[] runTest(Collection210X<Integer> c, int n) {
             int minValue = -1;
             int maxValue = Integer.MAX_VALUE - 100;
@@ -100,7 +136,16 @@ public class ExperimentHandler {
         }
     }
 
+    /**
+     * Test4 for the experiment. For greater detail, look at our report
+     */
     static class REMOVE_SecondNodeAndLastElement implements Test {
+        /**
+         * Runs test4
+         * @param c Mystery collection
+         * @param n number of elements
+         * @return Array of [n, bestCaseTime, worstCaseTime]
+         */
         @Override
         public int[] runTest(Collection210X<Integer> c, int n) {
             final int rootNode = 5;
@@ -131,7 +176,16 @@ public class ExperimentHandler {
         }
     }
 
+    /**
+     * Test5 for the experiment. For greater detail, look at our report
+     */
     static class REMOVE_FirstAndLast implements Test {
+        /**
+         * Runs test5
+         * @param c Mystery collection
+         * @param n number of elements
+         * @return Array of [n, bestCaseTime, worstCaseTime]
+         */
         @Override
         public int[] runTest(Collection210X<Integer> c, int n) {
             int firstElement = 0;
@@ -160,7 +214,16 @@ public class ExperimentHandler {
         }
     }
 
+    /**
+     * Test6 for the experiment. For greater detail, look at our report
+     */
     static class REMOVE_MaxAndMin implements Test {
+        /**
+         * Runs test6
+         * @param c Mystery collection
+         * @param n number of elements
+         * @return Array of [n, bestCaseTime, worstCaseTime]
+         */
         @Override
         public int[] runTest(Collection210X<Integer> c, int n) {
             int minValue = -1;
@@ -192,6 +255,14 @@ public class ExperimentHandler {
         }
     }
 
+    /**
+     * Method to run test and average the values over TRIALS times. This method is kind of funky because it takes in
+     * a class. That class must implement the test method, and this method will execute the runTest() method within
+     * the Test. What we are essentially doing is creating a method pointer in Java
+     * @param c MysteryDataStructure
+     * @param test Which test to run on the MysteryDataStructure
+     * @return 2D int array in the format [n, bestTime, worstTime] for all n in the data set
+     */
     public static int[][] runTestAndAverageValues(Collection210X<Integer> c, Test test) {
         int[][] testResults = new int[DATA_POINTS][3];
 
@@ -217,6 +288,12 @@ public class ExperimentHandler {
         return testResults;
     }
 
+    /**
+     * Helper method to determien the difference between a start and end time
+     * @param startTime time when the test was started
+     * @param endTime time when the test was ended
+     * @return the difference between the two times.
+     */
     public static int clockDifference(long startTime, long endTime) {
         return ((int) (endTime - startTime));
     }
