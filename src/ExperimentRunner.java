@@ -33,27 +33,27 @@ public class ExperimentRunner {
 			Collection210X<Integer> dataStructure = mysteryDataStructures[i];
 
 			CSVCreator.exportData(ExperimentHandler.runTestAndAverageValues(dataStructure,
-					eh._add_smallAndSorted), "test1", i);
+					eh._add_smallAndSorted), "runTestAndAverageValues", i);
 			dataStructure.clear();
 
 			CSVCreator.exportData(ExperimentHandler.runTestAndAverageValues(dataStructure,
-					eh._contains_firstAndLastTest), "test2", i);
+					eh._contains_firstAndLastTest), "firstAndLastTest", i);
 			dataStructure.clear();
 
 			CSVCreator.exportData(ExperimentHandler.runTestAndAverageValues(dataStructure,
-					eh._contains_maxAndMin), "test3", i);
+					eh._contains_maxAndMin), "containsTest", i);
 			dataStructure.clear();
 
 			CSVCreator.exportData(ExperimentHandler.runTestAndAverageValues(dataStructure,
-					eh._remove_firstAndLast), "test4", i);
+					eh._remove_firstAndLast), "removeFirstLastTest", i);
 			dataStructure.clear();
 
 			CSVCreator.exportData(ExperimentHandler.runTestAndAverageValues(dataStructure,
-					eh._remove_maxAndMin), "test5", i);
+					eh._remove_maxAndMin), "removeMaxMinTest", i);
 			dataStructure.clear();
 
 			CSVCreator.exportData(ExperimentHandler.runTestAndAverageValues(dataStructure,
-					eh._remove_singleChildAndLast), "test6", i);
+					eh._remove_singleChildAndLast), "removeSingleChildAndLAst", i);
 			dataStructure.clear();
 
 			System.out.print("Structure ");
